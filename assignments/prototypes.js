@@ -154,12 +154,88 @@ Humanoid.prototype = Object.create(CharacterStats.prototype)
 
   function Villain(villAttributes){
     Humanoid.call(this, villAttributes)
-    this.health = villAttributes.health
     this.power = villAttributes.power
+    this.fireBall = function(opponent){
+      while(opponent.healthPoints > 0){
+        opponent.healthPoints -= this.power
+        if(opponent.healthPoints <= 0){
+          `${this.name} has died!`
+          break
+        }
+        return `${this.name} the villain has attacked ${opponent.name}. ${opponent.name} has lost ${this.power} health points! ${opponent.name} now has ${opponent.healthPoints} left`
+      }
+    }
   }
 
   function Hero(heroAttributes){
     Humanoid.call(this, heroAttributes)
-    this.health = heroAttributes.health
     this.strength = heroAttributes.strength
+    this.punch = function(opponent){
+     while(opponent.healthPoints > 0){
+       opponent.healthPoints -= this.strength
+       if(opponent.healthPoints <= 0){
+        `${this.name} has died!`
+         break
+       }
+       return `${this.name} the hero has attacked ${opponent.name}. ${opponent.name} has lost ${this.strength} health point(s)! ${opponent.name} now has ${opponent.healthPoints} left`
+     }
+
+    }
   }
+  
+  const hero = new Hero({
+    createdAT: new Date(),
+    demension:{ 
+      length: 2,
+      width: 2,
+      height: 4
+    },
+    healthPoints: 100,
+    name: "James",
+    team: "Heros",
+    weapon: "Fist",
+    language: "English",
+    strength: Math.floor(Math.random() * 11)
+  })
+
+  const villain = new Villain({
+    createdAT: new Date(),
+    demension:{ 
+      length: 1,
+      width: 2,
+      height: 5
+    },
+    healthPoints: 100,
+    name: "Garry",
+    team: "Villans",
+    weapon: "Staff",
+    language: "English",
+    power: Math.floor(Math.random() * 11)
+  })
+
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
+  console.log(villain.fireBall(hero))
+  console.log(hero.punch(villain))
