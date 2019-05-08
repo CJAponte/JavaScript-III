@@ -16,15 +16,15 @@
   * destroy() // prototype method that returns: `${this.name} was removed from the game.`
 */
 
-  function GameObject(createdAt, name, dimensions){
-    this.createdAt = createdAt
-    this.name = name
-    this.dimensions = dimensions
+  function GameObject(attribute){
+    this.createdAt = attribute.createdAt
+    this.name = attribute.name
+    this.dimensions = attribute.dimensions
   }
-
-  GameObject.prototype.destroy = function(){
+    GameObject.prototype.destroy = function(){
     return `${this.name} was removed from the game.`
   }
+
 
 /*
   === CharacterStats ===
@@ -35,21 +35,18 @@
 
 
 
-  function CharacterStats(createdAt, name, dimensions, healthPoints){
-    GameObject.call(this, createdAt, name, dimensions)
-    this.healthPoints = healthPoints
-    this.takeDamage = function(){
-      return `${this.name} took damage`
-    }
+  function CharacterStats(statAttribute){
+    GameObject.call(this, statAttribute)
+    this.healthPoints = statAttribute.healthPoints
   }
 
-  // CharacterStats.prototype.takeDamage = function(){
-  //   return `${this.name} took damage`
-  // }
+  CharacterStats.prototype.takeDamage = function() {
+    return `${this.name} took damage`
+  }
 
   CharacterStats.prototype = Object.create(GameObject.prototype)
 
-  CharacterStats.prototype.constructor = CharacterStats
+
   /*
   === Humanoid (Having an appearance or character resembling that of a human.) ===
   * team
@@ -63,16 +60,17 @@
 
 
 
-function Humanoid(createdAt, name, dimensions, healthpoints, team, weapons, language){
-  GameObject.call(this, createdAt, name, dimensions)
-  CharacterStats.call(this, healthpoints)
-  this.team = team
-  this.weapons = weapons
-  this.lanuage = language
-  this.greet = function(){
+function Humanoid(humanAttribute){
+  CharacterStats.call(this, humanAttribute)
+  this.team = humanAttribute.team
+  this.weapons = humanAttribute.weapons
+  this.lanuage = humanAttribute.language
+}
+
+  Humanoid.prototype.greet = function() {
     return `${this.name} offers a greeting in ${this.language}`
   }
-}
+
 
 // Humanoid.prototype.greet = function(){
 //   return `${this.name} offers a greeting in ${this.language}`
@@ -80,7 +78,6 @@ function Humanoid(createdAt, name, dimensions, healthpoints, team, weapons, lang
 
 Humanoid.prototype = Object.create(CharacterStats.prototype)
 
-Humanoid.prototype.constructor = Humanoid
  
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
